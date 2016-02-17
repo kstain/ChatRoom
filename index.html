@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FSE Chat Room</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <script src="/javascripts/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+<h1 align="center">FSE Chat Room</h1>
+<div id="chatters-div">
+    <div align="center" font-weight="bold">Chatters</div>
+<table class="table table-striped" id="chatters">
+    <tbody id="chatters-body"></tbody>
+</table>
+</div>
+<ul id="chat-console" class="list-group"></ul>
+
+<form id="chat-form">
+    <input type="text" name="chat-input" id="chat-input" placeholder="type your message here ..." autofocus autocomplete="off"><br>
+    <input type="submit" value="send"/>
+</form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/app.js"></script>
+<script>
+    $(document).ready(function(){
+        console.log('ready');
+        $('#chatters').on('click', '.connected', function () {
+            $('#chat-input').val('Reply to ' + $(this).data('name') + ': ');
+            $(document).find('#chat-input').focus();
+        });
+        $('#chat-console').on('click', '.sender', function () {
+            $('#chat-input').val('Reply to ' + $(this).closest(".message").data('name') + ': ');
+            $(document).find('#chat-input').focus();
+        });
+    });
+</script>
+</body>
+</html>
